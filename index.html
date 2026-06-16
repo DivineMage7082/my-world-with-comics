@@ -27,6 +27,7 @@
   @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-6px);}80%{transform:translateX(6px);}}
   @keyframes popIn{0%{transform:scale(0.95);opacity:0;}100%{transform:scale(1);opacity:1;}}
   @keyframes slideUp{0%{transform:translateY(100%);opacity:0;}100%{transform:translateY(0);opacity:1;}}
+  @keyframes flyingBunny{0%{transform:translateX(-100vw) translateY(0) rotate(-15deg);opacity:0;}10%{opacity:1;}50%{transform:translateX(0vw) translateY(-20px) rotate(0deg);}90%{opacity:1;}100%{transform:translateX(100vw) translateY(-40px) rotate(15deg);opacity:0;}}
 
   .lock-card{
     background:rgba(255,255,255,0.88);backdrop-filter:blur(12px);
@@ -97,7 +98,7 @@
   .day-row{display:flex;gap:6px;padding-left:36px;margin-bottom:6px;}
   .day-label{width:26px;text-align:center;font-size:10px;color:#d4a0bc;}
   .dot-row{display:flex;gap:6px;align-items:center;}
-  .dot{width:26px;height:26px;border-radius:50%;background:#ffe0ee;border:1.5px solid #f9c8dc;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;cursor:pointer;transition:all 0.15s;flex-shrink:0;}
+  .dot{width:26px;height:26px;border-radius:50%;background:#ffe0ee;border:1.5px solid #f9c8dc;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;cursor:pointer;transition:all 0.15s;}
   .dot.on{background:linear-gradient(135deg,#f0799a,#e05585);border-color:#f0799a;box-shadow:0 2px 8px rgba(240,121,154,0.4);}
 
   .progress-bar{height:6px;background:#ffe0ee;border-radius:3px;overflow:hidden;margin-top:8px;}
@@ -200,6 +201,40 @@
   .add-book-card:hover{background:rgba(255,255,255,0.9);}
 
   /* COMIC COLLECTION */
+  .flying-header{
+    background:linear-gradient(135deg,#ffe0ee 0%,#ffd0e8 100%);
+    padding:24px 18px;
+    text-align:center;
+    margin-bottom:16px;
+    position:relative;
+    overflow:hidden;
+    min-height:100px;
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;
+  }
+  .flying-header-content{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    position:relative;z-index:2;
+  }
+  .flying-header h1{
+    font-size:28px;color:#c0628a;font-weight:bold;
+    margin:0;
+  }
+  .header-gif{
+    height:32px;
+    width:auto;
+  }
+  .flying-bunny{
+    position:absolute;
+    font-size:32px;
+    animation:flyingBunny linear infinite;
+    pointer-events:none;
+  }
+  .flying-bunny:nth-child(1){animation-duration:4s;animation-delay:0s;top:20%;}
+  .flying-bunny:nth-child(2){animation-duration:5s;animation-delay:1s;top:50%;}
+  .flying-bunny:nth-child(3){animation-duration:4.5s;animation-delay:2s;top:30%;}
+  .flying-bunny:nth-child(4){animation-duration:5.5s;animation-delay:0.5s;top:60%;}
+
   .main-header{
     background:linear-gradient(135deg,#ffe0ee 0%,#ffd0e8 100%);
     padding:16px 18px;
@@ -293,7 +328,7 @@
 
   /* BOOK DETAIL MODAL */
   .detail-cover{width:90px;height:126px;border-radius:6px 8px 8px 6px;object-fit:cover;margin:0 auto 12px;display:block;box-shadow:3px 3px 12px rgba(100,40,60,0.2);}
-  .detail-cover-placeholder{width:90px;height:126px;border-radius:6px 8px 8px 6px;background:linear-gradient(135deg,#f0799a,#e05585);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 12px;box-shadow:3px 3px 12px rgba(100,40,60,0.2);}
+  .detail-cover-placeholder{width:90px;height:126px;border-radius:6px 8px 8px 6px;background:linear-gradient(135deg,#f0799a,#e05585);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 12px;box-shadow:3px 3px 12px rgba(100,40,60,0.1);}
   .detail-title{font-size:17px;font-weight:bold;color:#5c2840;text-align:center;margin-bottom:4px;}
   .detail-status{font-size:12px;color:#d4a0bc;text-align:center;margin-bottom:16px;}
   .toggle-read-btn{width:100%;padding:11px;border:none;border-radius:50px;font-size:14px;margin-bottom:10px;}
@@ -377,29 +412,25 @@
 
   <!-- BOOKSHELF -->
   <div id="tab-books" class="tab-content">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-      <div style="font-size:13px;color:#d4a0bc;">
-        <span id="bookCount">0</span> books · <span id="readCount">0</span> read
-      </div>
-      <button class="pink-btn sm" onclick="openAddBook()">+ Add Book</button>
-    </div>
-    <div class="shelf-section">
-      <div class="shelf-label">📖 Want to Read</div>
-      <div class="shelf" id="shelf-unread"></div>
-    </div>
-    <div class="shelf-section">
-      <div class="shelf-label">✅ Finished</div>
-      <div class="shelf" id="shelf-read"></div>
-    </div>
 
     <!-- COMIC COLLECTION -->
-    <header class="main-header">
-      <h1>Comic Collection 📚</h1>
+    <header class="flying-header">
+      <div class="flying-bunny">🐰</div>
+      <div class="flying-bunny">✨</div>
+      <div class="flying-bunny">🐰</div>
+      <div class="flying-bunny">💕</div>
+      <div class="flying-header-content">
+        <img src="https://myemotes.io/emotes/coffee_bunny" alt="Coffee Bunny" class="header-gif">
+        <h1>My Library</h1>
+      </div>
     </header>
 
     <div class="genre-shelves-container">
       <div class="shelf-section">
-        <h3 class="shelf-title">🌈 YAOI</h3>
+        <h3 class="shelf-title">
+          🌈 YAOI
+          <img src="https://emoji.gg/emoji/4552-melody-kiss" alt="Melody Kiss" class="title-icon">
+        </h3>
         <div class="shelf-row">
           <div class="book-card">
             <div class="book-cover-placeholder">📖</div>
@@ -415,7 +446,10 @@
       </div>
 
       <div class="shelf-section">
-        <h3 class="shelf-title">💌 SHOUJO</h3>
+        <h3 class="shelf-title">
+          💌 SHOUJO
+          <img src="https://emoji.gg/emoji/78005-hellokittywithtea" alt="Hello Kitty with Tea" class="title-icon">
+        </h3>
         <div class="shelf-row">
         </div>
       </div>
@@ -428,7 +462,7 @@
 
       <div class="shelf-section">
         <h3 class="shelf-title">
-          <img src="https://cdn3.emoji.gg/emojis/32813-hellokitty.gif" alt="Hello Kitty" class="title-icon" style="height: 24px; vertical-align: middle; margin-right: 8px;">
+          <img src="https://emoji.gg/emoji/41340-keroppiheart" alt="Keroppi Heart" class="title-icon">
           ISEKAI
         </h3>
         <div class="shelf-row">
@@ -583,11 +617,11 @@ function renderHome(){
   data.watchlist.forEach((w,i)=>{const s=document.createElement("span");s.className="pill purple";s.innerHTML=w+` <span class="pill-x" onclick="removeWatch(${i})">×</span>`;wap.appendChild(s);});
 }
 
-function editJournal(){document.getElementById("journalDisplay").style.display="none";document.getElementById("journalEdit").style.display="block";document.getElementById("journalText").value=data.journal;document.getElementById("journalText").focus();}
-function saveJournal(){data.journal=document.getElementById("journalText").value;document.getElementById("journalDisplay").textContent=data.journal||"✏️ tap to write...";document.getElementById("journalDisplay").style.display="";document.getElementById("journalEdit").style.display="none";document.getElementById("journalDisplay2").textContent=data.journal||"✏️ tap to write...";}  
+function editJournal(){document.getElementById("journalDisplay").style.display="none";document.getElementById("journalEdit").style.display="block";document.getElementById("journalText").value=data.journal;}
+function saveJournal(){data.journal=document.getElementById("journalText").value;document.getElementById("journalDisplay").textContent=data.journal||"✏️ tap to write...";document.getElementById("journalDisplay").style.display="";document.getElementById("journalEdit").style.display="none";}
 function cancelJournal(){document.getElementById("journalDisplay").style.display="";document.getElementById("journalEdit").style.display="none";}
-function editJournal2(){document.getElementById("journalDisplay2").style.display="none";document.getElementById("journalEdit2").style.display="block";document.getElementById("journalText2").value=data.journal;document.getElementById("journalText2").focus();}
-function saveJournal2(){data.journal=document.getElementById("journalText2").value;document.getElementById("journalDisplay2").textContent=data.journal||"✏️ tap to write...";document.getElementById("journalDisplay2").style.display="";document.getElementById("journalEdit2").style.display="none";document.getElementById("journalDisplay").textContent=data.journal||"✏️ tap to write...";}  
+function editJournal2(){document.getElementById("journalDisplay2").style.display="none";document.getElementById("journalEdit2").style.display="block";document.getElementById("journalText2").value=data.journal;}
+function saveJournal2(){data.journal=document.getElementById("journalText2").value;document.getElementById("journalDisplay2").textContent=data.journal||"✏️ tap to write...";document.getElementById("journalDisplay2").style.display="";document.getElementById("journalEdit2").style.display="none";}
 function cancelJournal2(){document.getElementById("journalDisplay2").style.display="";document.getElementById("journalEdit2").style.display="none";}
 
 function addWish(){const v=document.getElementById("wishInput").value.trim();if(!v)return;data.wishlist.push(v);document.getElementById("wishInput").value="";renderHome();}
@@ -600,31 +634,31 @@ function renderTracker(){
   data.hobbies.forEach(h=>{
     const filled=h.logs.filter(Boolean).length;const pct=Math.min(100,(filled/h.goal)*100);
     const card=document.createElement("div");card.className="card";
-    card.innerHTML=`<div class="hobby-header"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:20px">${h.icon}</span><span class="hobby-name">${h.name}</span></div><div style="display:flex;align-items:center;gap:6px;"><span class="hobby-meta">${filled}/${h.goal}</span><button class="del-btn" onclick="deleteHobby(${h.id})">×</button></div></div><div class="dot-row" id="dots-${h.id}"></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div><div class="note-box" id="noteBox-${h.id}" onclick="editNote(${h.id})">${h.note||"✏️ tap to add a note..."}</div><div class="note-edit" id="noteEdit-${h.id}"><textarea rows="2" placeholder="Write a note..." id="noteTa-${h.id}"></textarea><div class="btn-row"><button class="pink-btn sm" onclick="saveNote(${h.id})">Save</button><button class="pink-btn sm muted" onclick="cancelNote(${h.id})">Cancel</button></div></div>`;
+    card.innerHTML=`<div class="hobby-header"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:20px">${h.icon}</span><span class="hobby-name">${h.name}</span></div><div class="hobby-meta">${filled}/${h.goal} days</div><button class="del-btn" onclick="deleteHobby(${h.id})">×</button></div><div class="dot-row" id="dots-${h.id}"></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>`;
     list.appendChild(card);
     const dotRow=document.getElementById("dots-"+h.id);
     h.logs.forEach((v,i)=>{const dot=document.createElement("div");dot.className="dot"+(v?" on":"");dot.textContent=v?"✓":"";dot.onclick=()=>{h.logs[i]=v?0:1;renderTracker();renderHome();};dotRow.appendChild(dot);});
   });
 }
-function editNote(id){const h=data.hobbies.find(h=>h.id===id);document.getElementById("noteBox-"+id).style.display="none";document.getElementById("noteEdit-"+id).style.display="block";document.getElementById("noteTa-"+id).value=h.note;document.getElementById("noteTa-"+id).focus();}
+function editNote(id){const h=data.hobbies.find(h=>h.id===id);document.getElementById("noteBox-"+id).style.display="none";document.getElementById("noteEdit-"+id).style.display="block";document.getElementById("noteTa-"+id).value=h.note;}
 function saveNote(id){const h=data.hobbies.find(h=>h.id===id);h.note=document.getElementById("noteTa-"+id).value;document.getElementById("noteBox-"+id).textContent=h.note||"✏️ tap to add a note...";document.getElementById("noteBox-"+id).style.display="";document.getElementById("noteEdit-"+id).style.display="none";renderNotes();}
 function cancelNote(id){document.getElementById("noteBox-"+id).style.display="";document.getElementById("noteEdit-"+id).style.display="none";}
 function deleteHobby(id){data.hobbies=data.hobbies.filter(h=>h.id!==id);renderTracker();renderHome();renderNotes();}
 function showAddForm(){document.getElementById("addForm").style.display="block";document.getElementById("addHobbyBtn").style.display="none";}
 function hideAddForm(){document.getElementById("addForm").style.display="none";document.getElementById("addHobbyBtn").style.display="";}
-function addHobby(){const name=document.getElementById("newName").value.trim();if(!name)return;const goal=parseInt(document.getElementById("goalRange").value);data.hobbies.push({id:Date.now(),name,icon:selectedIcon,logs:[0,0,0,0,0,0,0],goal,note:""});document.getElementById("newName").value="";hideAddForm();renderTracker();renderHome();renderNotes();}
+function addHobby(){const name=document.getElementById("newName").value.trim();if(!name)return;const goal=parseInt(document.getElementById("goalRange").value);data.hobbies.push({id:Date.now(),name,icon:selectedIcon,logs:Array(7).fill(0),goal,note:""});document.getElementById("newName").value="";hideAddForm();renderTracker();renderHome();renderNotes();}
 
 function renderNotes(){
   document.getElementById("journalDisplay2").textContent=data.journal||"✏️ tap to write...";
   const nb=document.getElementById("hobbyNotes");nb.innerHTML="";
   data.hobbies.forEach(h=>{
     const card=document.createElement("div");card.className="card";
-    card.innerHTML=`<div class="card-title">${h.icon} ${h.name}</div><div class="note-box" id="noteBox2-${h.id}" onclick="editNote2(${h.id})">${h.note||"✏️ tap to write about this hobby..."}</div><div class="note-edit" id="noteEdit2-${h.id}"><textarea rows="3" placeholder="Write your thoughts..." id="noteTa2-${h.id}"></textarea><div class="btn-row"><button class="pink-btn sm" onclick="saveNote2(${h.id})">Save 💾</button><button class="pink-btn sm muted" onclick="cancelNote2(${h.id})">Cancel</button></div></div>`;
+    card.innerHTML=`<div class="card-title">${h.icon} ${h.name}</div><div class="note-box" id="noteBox2-${h.id}" onclick="editNote2(${h.id})">${h.note||"✏️ tap to write about this hobby..."}</div><div class="note-edit" id="noteEdit2-${h.id}"><textarea class="big-textarea" id="noteTa2-${h.id}" rows="4"></textarea><div style="display:flex;gap:8px;margin-top:6px;"><button class="pink-btn sm" onclick="saveNote2(${h.id})">Save</button><button class="pink-btn sm muted" onclick="cancelNote2(${h.id})">Cancel</button></div></div>`;
     nb.appendChild(card);
   });
 }
-function editNote2(id){const h=data.hobbies.find(h=>h.id===id);document.getElementById("noteBox2-"+id).style.display="none";document.getElementById("noteEdit2-"+id).style.display="block";document.getElementById("noteTa2-"+id).value=h.note;document.getElementById("noteTa2-"+id).focus();}
-function saveNote2(id){const h=data.hobbies.find(h=>h.id===id);h.note=document.getElementById("noteTa2-"+id).value;document.getElementById("noteBox2-"+id).textContent=h.note||"✏️ tap to write about this hobby...";document.getElementById("noteBox2-"+id).style.display="";document.getElementById("noteEdit2-"+id).style.display="none";renderTracker();}
+function editNote2(id){const h=data.hobbies.find(h=>h.id===id);document.getElementById("noteBox2-"+id).style.display="none";document.getElementById("noteEdit2-"+id).style.display="block";document.getElementById("noteTa2-"+id).value=h.note;}
+function saveNote2(id){const h=data.hobbies.find(h=>h.id===id);h.note=document.getElementById("noteTa2-"+id).value;document.getElementById("noteBox2-"+id).textContent=h.note||"✏️ tap to write about this hobby...";document.getElementById("noteBox2-"+id).style.display="";document.getElementById("noteEdit2-"+id).style.display="none";renderNotes();}
 function cancelNote2(id){document.getElementById("noteBox2-"+id).style.display="";document.getElementById("noteEdit2-"+id).style.display="none";}
 
 // BOOKSHELF
@@ -633,8 +667,6 @@ function renderBooks(){
   const read=data.books.filter(b=>b.read);
   document.getElementById("bookCount").textContent=data.books.length;
   document.getElementById("readCount").textContent=read.length;
-  renderShelf("shelf-unread",unread);
-  renderShelf("shelf-read",read);
 }
 
 function renderShelf(shelfId,books){
