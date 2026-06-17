@@ -134,6 +134,8 @@
   .dash-card.c-rose{background:linear-gradient(160deg,#ffe8ea 0%,#ffc2c8 100%);}
   .dash-card.c-mint{background:linear-gradient(160deg,#e6f7ee 0%,#c5eed8 100%);}
   .dash-card.c-sky{background:linear-gradient(160deg,#e3f0fb 0%,#bfdcf5 100%);}
+  .dash-card.c-cream{background:linear-gradient(160deg,#fff8e8 0%,#ffe9b8 100%);}
+  .dash-card.c-blush{background:linear-gradient(160deg,#ffe9f5 0%,#ffd2ea 100%);}
   .dash-icon{font-size:32px;margin-bottom:10px;display:block;}
   .dash-title{font-size:14px;font-weight:bold;color:#5c2840;margin-bottom:4px;line-height:1.2;}
   .dash-desc{font-size:11px;color:#8b5e74;line-height:1.35;}
@@ -155,25 +157,37 @@
   .quicklink span{font-size:10px;color:#8b4a6a;font-weight:bold;}
 
   /* MUSIC WIDGET */
-  .music-card{display:flex;align-items:center;gap:14px;}
+  .music-card{display:flex;align-items:center;gap:10px;}
   .music-disc{
-    width:60px;height:60px;border-radius:50%;flex-shrink:0;
+    width:38px;height:38px;border-radius:50%;flex-shrink:0;
     background:linear-gradient(135deg,#f0799a,#e05585);
     display:flex;align-items:center;justify-content:center;
-    font-size:24px;color:#fff;
-    box-shadow:0 4px 14px rgba(224,85,133,0.35);
+    font-size:15px;color:#fff;
+    box-shadow:0 3px 10px rgba(224,85,133,0.35);
     animation:spin 6s linear infinite;
   }
   @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
   .music-info{flex:1;min-width:0;}
-  .music-label{font-size:10px;color:#d4a0bc;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
-  .music-title{font-size:14px;font-weight:bold;color:#5c2840;}
-  .music-sub{font-size:11px;color:#a8527a;margin-top:3px;line-height:1.3;}
+  .music-label{font-size:8.5px;color:#d4a0bc;text-transform:uppercase;letter-spacing:1px;margin-bottom:1px;}
+  .music-title{font-size:12px;font-weight:bold;color:#5c2840;}
+  .music-sub{font-size:9.5px;color:#a8527a;margin-top:1px;line-height:1.25;}
   .music-play{
-    width:34px;height:34px;border-radius:50%;flex-shrink:0;
+    width:26px;height:26px;border-radius:50%;flex-shrink:0;
     background:#f0799a;color:#fff;border:none;
-    display:flex;align-items:center;justify-content:center;font-size:13px;
+    display:flex;align-items:center;justify-content:center;font-size:10px;
   }
+
+  /* PROFILE */
+  .profile-card{text-align:center;padding:28px 20px;}
+  .profile-avatar{
+    width:84px;height:84px;border-radius:50%;margin:0 auto 14px;
+    background:linear-gradient(135deg,#f0799a,#e05585);
+    display:flex;align-items:center;justify-content:center;
+    font-size:38px;box-shadow:0 6px 18px rgba(224,85,133,0.35);
+    border:3px solid #fff;
+  }
+  .profile-name{font-size:18px;font-weight:bold;color:#5c2840;margin-bottom:6px;}
+  .profile-bio{font-size:12px;color:#a8527a;line-height:1.5;max-width:260px;margin:0 auto;}
 
   .day-row{display:flex;gap:6px;padding-left:36px;margin-bottom:6px;}
   .day-label{width:26px;text-align:center;font-size:10px;color:#d4a0bc;}
@@ -299,6 +313,17 @@
   .flying-header h1{
     font-size:20px;color:#c0628a;font-weight:bold;
     margin:0;
+  }
+  .loading-dots span{
+    opacity:0;
+    animation:dotFade 1.4s infinite;
+  }
+  .loading-dots span:nth-child(1){animation-delay:0s;}
+  .loading-dots span:nth-child(2){animation-delay:0.2s;}
+  .loading-dots span:nth-child(3){animation-delay:0.4s;}
+  @keyframes dotFade{
+    0%,80%,100%{opacity:0;}
+    40%{opacity:1;}
   }
   .header-gif{
     height:22px;
@@ -459,13 +484,13 @@
         <div class="dash-desc">Track your reading and collections</div>
         <div class="dash-arrow">→</div>
       </div>
-      <div class="dash-card c-purple" onclick="scrollToSection('watchlistSection')">
+      <div class="dash-card c-purple" onclick="openWatchlistModal()">
         <span class="dash-icon">🍿</span>
         <div class="dash-title">Movies Watchlist</div>
         <div class="dash-desc">Keep track of movies to watch</div>
         <div class="dash-arrow">→</div>
       </div>
-      <div class="dash-card c-rose" onclick="scrollToSection('wishlistSection')">
+      <div class="dash-card c-rose" onclick="openWishlistModal()">
         <span class="dash-icon">🛍</span>
         <div class="dash-title">Shopping Wishlist</div>
         <div class="dash-desc">Save your favorite finds & wishlists</div>
@@ -489,37 +514,42 @@
         <div class="dash-desc">Your game library & play history</div>
         <div class="dash-arrow">→</div>
       </div>
+      <div class="dash-card c-cream" onclick="openRecipesModal()">
+        <span class="dash-icon">🍳</span>
+        <div class="dash-title">Recipes to Try</div>
+        <div class="dash-desc">Save recipes you want to cook</div>
+        <div class="dash-arrow">→</div>
+      </div>
+      <div class="dash-card c-blush" onclick="openBucketListModal()">
+        <span class="dash-icon">🗺️</span>
+        <div class="dash-title">Travel Bucket List</div>
+        <div class="dash-desc">Places to visit & future trips</div>
+        <div class="dash-arrow">→</div>
+      </div>
     </div>
 
-    <div class="card">
-      <div class="card-title">🎵 Music & Vibes</div>
+    <div class="card" style="margin-bottom:0;padding:10px 14px;">
+      <div class="card-title" style="margin-bottom:6px;">🎵 Music & Vibes</div>
       <div class="music-card">
         <div class="music-disc">🎵</div>
         <div class="music-info">
           <div class="music-label">Now Playing</div>
           <div class="music-title">Your favorite track</div>
-          <div class="music-sub">send me a Spotify or Apple Music link and I'll embed the real player here ✨</div>
+          <div class="music-sub">send a Spotify link to embed it ✨</div>
         </div>
         <button class="music-play">▶</button>
       </div>
     </div>
 
-    <div class="card" id="wishlistSection">
-      <div class="card-title">🛍 Wishlist</div>
-      <div class="pills" id="wishPills"></div>
-      <div class="input-row">
-        <input class="pill-input" id="wishInput" placeholder="add to wishlist..." onkeydown="if(event.key==='Enter')addWish()"/>
-        <button class="pink-btn" onclick="addWish()">+</button>
+    <header class="flying-header" id="homeBottomBanner" style="margin-top:10px;margin-bottom:0;min-height:48px;">
+      <div class="flying-bunny">🐰</div>
+      <div class="flying-bunny">✨</div>
+      <div class="flying-bunny">🐰</div>
+      <div class="flying-bunny">💕</div>
+      <div class="flying-header-content">
+        <h1 style="font-size:16px;">Thinking<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></h1>
       </div>
-    </div>
-    <div class="card" id="watchlistSection">
-      <div class="card-title">🎬 K-drama / Watchlist</div>
-      <div class="pills" id="watchPills"></div>
-      <div class="input-row">
-        <input class="pill-input" id="watchInput" placeholder="add drama or show..." onkeydown="if(event.key==='Enter')addWatch()"/>
-        <button class="pink-btn" onclick="addWatch()">+</button>
-      </div>
-    </div>
+    </header>
   </div>
 
   <!-- TRACKER -->
@@ -538,6 +568,23 @@
       </div>
     </div>
     <button class="pink-btn full" id="addHobbyBtn" onclick="showAddForm()">+ Add Hobby</button>
+  </div>
+
+  <!-- PROFILE -->
+  <div id="tab-profile" class="tab-content">
+    <div class="card profile-card">
+      <div class="profile-avatar">🌸</div>
+      <div class="profile-name">Fifi 🧸💕</div>
+      <div class="profile-bio">I'm literally just a girl 🎀</div>
+    </div>
+    <div class="card">
+      <div class="card-title">💌 My Links</div>
+      <div class="quicklinks-row">
+        <a class="quicklink" href="https://outlook.cloud.microsoft/mail/0/" target="_blank" rel="noopener">📧<span>Email</span></a>
+        <a class="quicklink" href="https://www.linkedin.com/feed/" target="_blank" rel="noopener">💼<span>LinkedIn</span></a>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:6px;font-size:11px;color:#d4a0bc;">Loading<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <!-- BOOKSHELF -->
@@ -618,10 +665,11 @@
   </div>
 
   <nav class="navbar">
-    <button class="nav-btn active" id="nav-home" onclick="switchTab('home')"><span class="nav-icon">🏠</span><span>Home</span></button>
-    <button class="nav-btn" id="nav-tracker" onclick="switchTab('tracker')"><span class="nav-icon">✅</span><span>Tracker</span></button>
-    <button class="nav-btn" id="nav-books" onclick="switchTab('books')"><img src="https://cdn3.emoji.gg/emojis/74070-hello-kitty-reading.png" alt="Hello Kitty Reading" class="nav-gif"><span>Shelf</span></button>
+    <button class="nav-btn active" id="nav-home" onclick="switchTab('home')"><span class="nav-icon">🎀</span><span>Home</span></button>
+    <button class="nav-btn" id="nav-tracker" onclick="switchTab('tracker')"><span class="nav-icon">🪄</span><span>Tracker</span></button>
+    <button class="nav-btn" id="nav-books" onclick="switchTab('books')"><span class="nav-icon">📚</span><span>Shelf</span></button>
     <button class="nav-btn" id="nav-notes" onclick="switchTab('notes')"><span class="nav-icon">📝</span><span>Notes</span></button>
+    <button class="nav-btn" id="nav-profile" onclick="switchTab('profile')"><span class="nav-icon">🪞</span><span>Profile</span></button>
   </nav>
 </div>
 
@@ -654,6 +702,58 @@
   </div>
 </div>
 
+<!-- WISHLIST MODAL -->
+<div class="modal-overlay" id="wishlistModal" style="display:none;" onclick="closeWishlistModal(event)">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeWishlistModalDirect()">×</button>
+    <div class="modal-title">🛍 Wishlist</div>
+    <div class="pills" id="wishPills"></div>
+    <div class="input-row">
+      <input class="pill-input" id="wishInput" placeholder="add to wishlist..." onkeydown="if(event.key==='Enter')addWish()"/>
+      <button class="pink-btn" onclick="addWish()">+</button>
+    </div>
+  </div>
+</div>
+
+<!-- WATCHLIST MODAL -->
+<div class="modal-overlay" id="watchlistModal" style="display:none;" onclick="closeWatchlistModal(event)">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeWatchlistModalDirect()">×</button>
+    <div class="modal-title">🎬 K-drama / Watchlist</div>
+    <div class="pills" id="watchPills"></div>
+    <div class="input-row">
+      <input class="pill-input" id="watchInput" placeholder="add drama or show..." onkeydown="if(event.key==='Enter')addWatch()"/>
+      <button class="pink-btn" onclick="addWatch()">+</button>
+    </div>
+  </div>
+</div>
+
+<!-- RECIPES MODAL -->
+<div class="modal-overlay" id="recipesModal" style="display:none;" onclick="closeRecipesModal(event)">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeRecipesModalDirect()">×</button>
+    <div class="modal-title">🍳 Recipes to Try</div>
+    <div class="pills" id="recipePills"></div>
+    <div class="input-row">
+      <input class="pill-input" id="recipeInput" placeholder="add a recipe..." onkeydown="if(event.key==='Enter')addRecipe()"/>
+      <button class="pink-btn" onclick="addRecipe()">+</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRAVEL BUCKET LIST MODAL -->
+<div class="modal-overlay" id="bucketListModal" style="display:none;" onclick="closeBucketListModal(event)">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeBucketListModalDirect()">×</button>
+    <div class="modal-title">🗺️ Travel Bucket List</div>
+    <div class="pills" id="bucketPills"></div>
+    <div class="input-row">
+      <input class="pill-input" id="bucketInput" placeholder="add a place or trip idea..." onkeydown="if(event.key==='Enter')addBucket()"/>
+      <button class="pink-btn" onclick="addBucket()">+</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const PASSWORD = "2013";
 const ICONS = ["🎨","📚","🎬","🌸","🎮","🎵","✍️","🧘","🍳","📷","🧶","🏃","🌱","💄","🎸"];
@@ -672,6 +772,8 @@ let data = {
   journal:"My space. My pace. My world. 🌸\n\nGoals this week:\n- Finish my manga chapter\n- Start a new K-drama\n- Self care Sunday 💆‍♀️",
   wishlist:["New manga volume","Cute desk lamp","Boba tea supplies"],
   watchlist:["Lovely Runner","My Demon","Queen of Tears"],
+  recipes:[],
+  bucketlist:[],
   books:[
     {id:1,title:"Horimiya",cover:null,read:true},
     {id:2,title:"Solo Leveling",cover:null,read:false},
@@ -715,10 +817,21 @@ function switchTab(name){
   if(name==="books")renderBooks();
 }
 
-function scrollToSection(id){
-  const el=document.getElementById(id);
-  if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
-}
+function openWishlistModal(){document.getElementById("wishlistModal").style.display="flex";}
+function closeWishlistModal(e){if(e.target===document.getElementById("wishlistModal"))closeWishlistModalDirect();}
+function closeWishlistModalDirect(){document.getElementById("wishlistModal").style.display="none";}
+
+function openWatchlistModal(){document.getElementById("watchlistModal").style.display="flex";}
+function closeWatchlistModal(e){if(e.target===document.getElementById("watchlistModal"))closeWatchlistModalDirect();}
+function closeWatchlistModalDirect(){document.getElementById("watchlistModal").style.display="none";}
+
+function openRecipesModal(){document.getElementById("recipesModal").style.display="flex";}
+function closeRecipesModal(e){if(e.target===document.getElementById("recipesModal"))closeRecipesModalDirect();}
+function closeRecipesModalDirect(){document.getElementById("recipesModal").style.display="none";}
+
+function openBucketListModal(){document.getElementById("bucketListModal").style.display="flex";}
+function closeBucketListModal(e){if(e.target===document.getElementById("bucketListModal"))closeBucketListModalDirect();}
+function closeBucketListModalDirect(){document.getElementById("bucketListModal").style.display="none";}
 
 function init(){buildIconGrid();buildDayLabels();renderHome();renderTracker();renderNotes();renderBooks();}
 
@@ -737,6 +850,10 @@ function renderHome(){
   data.wishlist.forEach((w,i)=>{const s=document.createElement("span");s.className="pill";s.innerHTML=w+` <span class="pill-x" onclick="removeWish(${i})">×</span>`;wp.appendChild(s);});
   const wap=document.getElementById("watchPills");wap.innerHTML="";
   data.watchlist.forEach((w,i)=>{const s=document.createElement("span");s.className="pill purple";s.innerHTML=w+` <span class="pill-x" onclick="removeWatch(${i})">×</span>`;wap.appendChild(s);});
+  const rp=document.getElementById("recipePills");rp.innerHTML="";
+  data.recipes.forEach((w,i)=>{const s=document.createElement("span");s.className="pill";s.innerHTML=w+` <span class="pill-x" onclick="removeRecipe(${i})">×</span>`;rp.appendChild(s);});
+  const bp=document.getElementById("bucketPills");bp.innerHTML="";
+  data.bucketlist.forEach((w,i)=>{const s=document.createElement("span");s.className="pill purple";s.innerHTML=w+` <span class="pill-x" onclick="removeBucket(${i})">×</span>`;bp.appendChild(s);});
 }
 
 function editJournal2(){document.getElementById("journalDisplay2").style.display="none";document.getElementById("journalEdit2").style.display="block";document.getElementById("journalText2").value=data.journal;}
@@ -747,6 +864,10 @@ function addWish(){const v=document.getElementById("wishInput").value.trim();if(
 function removeWish(i){data.wishlist.splice(i,1);renderHome();}
 function addWatch(){const v=document.getElementById("watchInput").value.trim();if(!v)return;data.watchlist.push(v);document.getElementById("watchInput").value="";renderHome();}
 function removeWatch(i){data.watchlist.splice(i,1);renderHome();}
+function addRecipe(){const v=document.getElementById("recipeInput").value.trim();if(!v)return;data.recipes.push(v);document.getElementById("recipeInput").value="";renderHome();}
+function removeRecipe(i){data.recipes.splice(i,1);renderHome();}
+function addBucket(){const v=document.getElementById("bucketInput").value.trim();if(!v)return;data.bucketlist.push(v);document.getElementById("bucketInput").value="";renderHome();}
+function removeBucket(i){data.bucketlist.splice(i,1);renderHome();}
 
 function renderTracker(){
   const list=document.getElementById("hobbyList");list.innerHTML="";
